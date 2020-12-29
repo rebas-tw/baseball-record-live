@@ -26,9 +26,9 @@ const PrtSC = ({ displayStartingLineUp, startingLineUp, awayTeamName, homeTeamNa
       <StyledTable display={displayStartingLineUp ? 'block' : 'none'}>
         <thead style={{ width: '240px' }}>
           <tr style={{ width: '240px' }}>
-            <th style={{ width: '24px' }}></th>
+            <th style={{ width: '36px' }}></th>
             <th style={{ width: '48px' }}>背號</th>
-            <th style={{ width: '120px' }}>球員</th>
+            <th style={{ width: '108px' }}>球員</th>
             <th style={{ width: '48px' }}>守位</th>
           </tr>
         </thead>
