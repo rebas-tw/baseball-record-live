@@ -157,6 +157,7 @@ const AddPlayerPanel = ({ side, addPlayer }) => {
 };
 
 const Registry = ({
+  swapAwayHomeTeam,
   awayTeamName,
   awayPlayers,
   homeTeamName,
@@ -174,7 +175,9 @@ const Registry = ({
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>球隊/員登錄</ModalHeader>
+          <ModalHeader>
+            球隊/員登錄<Button onClick={swapAwayHomeTeam}>主客球隊/員互調</Button>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Tabs>
