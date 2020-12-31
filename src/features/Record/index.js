@@ -10,6 +10,7 @@ import { debugPlayers, debugInGamePlayers } from './Const';
 const debugMode = true;
 
 const Record = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
   const [awayTeamName, setAwayTeamName] = useState('尚未設定');
   const [awayPlayers, setAwayPlayers] = useState(debugMode ? debugPlayers : []);
   const [awayInGamePlayers, setAwayInGamePlayers] = useState(
@@ -89,6 +90,11 @@ const Record = () => {
 
   const handleNumberKeyDown = useCallback(
     (event) => {
+      const currentActive = document.activeElement;
+      if (isRegistering || currentActive.tagName.toUpperCase() === 'INPUT') {
+        return;
+      }
+
       const code = event.code;
       if (isReverse) {
         return handleNumberKeyReverse(event);
@@ -171,7 +177,19 @@ const Record = () => {
           break;
       }
     },
-    [awayScores, balls, bases, handleNumberKeyReverse, homeScores, inningFrame, innings, isReverse, outs, strikes],
+    [
+      awayScores,
+      balls,
+      bases,
+      handleNumberKeyReverse,
+      homeScores,
+      inningFrame,
+      innings,
+      isRegistering,
+      isReverse,
+      outs,
+      strikes,
+    ],
   );
 
   useEffect(() => {
@@ -305,7 +323,8 @@ const Record = () => {
   };
 
   const handleInningsChange = (e) => {
-    setInnings(e.target.value);
+    const value = parseInt(e.target.value);
+    setInnings(Number.isNaN(value) ? 0 : value);
   };
 
   const handleInningFrameChange = () => {
@@ -317,11 +336,13 @@ const Record = () => {
   };
 
   const handleAwayScoreChange = (e) => {
-    setAwayScores(e.target.value);
+    const value = parseInt(e.target.value);
+    setAwayScores(Number.isNaN(value) ? 0 : value);
   };
 
   const handleHomeScoreChange = (e) => {
-    setHomeScores(e.target.value);
+    const value = parseInt(e.target.value);
+    setHomeScores(Number.isNaN(value) ? 0 : value);
   };
 
   return (
@@ -466,6 +487,7 @@ const Record = () => {
               <Button onClick={handleLineUpPanelDisplay('home')}>編輯主場打序</Button>
             </Flex>
             <Registry
+              setIsRegistering={setIsRegistering}
               swapAwayHomeTeam={swapAwayHomeTeam}
               awayTeamName={awayTeamName}
               awayPlayers={awayPlayers}

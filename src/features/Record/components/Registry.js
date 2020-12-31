@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Flex, Text, Input } from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import {
@@ -157,6 +157,7 @@ const AddPlayerPanel = ({ side, addPlayer }) => {
 };
 
 const Registry = ({
+  setIsRegistering,
   swapAwayHomeTeam,
   awayTeamName,
   awayPlayers,
@@ -168,6 +169,9 @@ const Registry = ({
   removePlayer,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    setIsRegistering(isOpen);
+  }, [isOpen, setIsRegistering]);
 
   return (
     <>
