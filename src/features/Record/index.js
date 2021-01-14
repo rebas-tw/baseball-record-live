@@ -366,7 +366,7 @@ const Record = () => {
     };
     if (inningFrame === '上') {
       const currentPlayer = awayInGamePlayers[reviewPlayerIndex === -1 ? awayCurrentPlayerIndex : reviewPlayerIndex];
-      if (!currentPlayer) {
+      if (!currentPlayer.player) {
         return data;
       }
 
@@ -385,7 +385,7 @@ const Record = () => {
     }
 
     const currentPlayer = homeInGamePlayers[reviewPlayerIndex === -1 ? homeCurrentPlayerIndex : reviewPlayerIndex];
-    if (!currentPlayer) {
+    if (!currentPlayer.player) {
       return data;
     }
 
@@ -476,7 +476,7 @@ const Record = () => {
 
     if (inningFrame === '上') {
       const currentPlayer = awayInGamePlayers[awayCurrentPlayerIndex];
-      if (!currentPlayer) {
+      if (!currentPlayer.player) {
         return;
       }
 
@@ -495,7 +495,7 @@ const Record = () => {
     }
 
     const currentPlayer = homeInGamePlayers[homeCurrentPlayerIndex];
-    if (!currentPlayer) {
+    if (!currentPlayer.player) {
       return;
     }
 

@@ -16,6 +16,7 @@ const LineUp = ({ players, inGamePlayers, setInGamePlayer }) => {
             placeholder="選擇選手"
             value={inGamePlayer?.player ? inGamePlayer.player : ''}
             onChange={setInGamePlayer('player', index)}
+            size="sm"
           >
             {players.map((player) => (
               <option
@@ -29,6 +30,7 @@ const LineUp = ({ players, inGamePlayers, setInGamePlayer }) => {
             placeholder="守位"
             value={inGamePlayer?.position ? inGamePlayer.position : ''}
             onChange={setInGamePlayer('position', index)}
+            size="sm"
           >
             {POSITIONS.map((position) => (
               <option key={position} value={position}>
