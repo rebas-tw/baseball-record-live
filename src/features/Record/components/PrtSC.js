@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { filter, reverse } from 'ramda';
+import { BATTING_RESULT_LIST } from '../Const';
 
 const StyledPrtSC = styled.div`
   width: 100%;
@@ -84,6 +85,24 @@ const Base = styled.div`
   margin: ${({ index }) => (index === 1 ? '1px 1px 18px 1px' : '18px 1px 1px 1px')};
 `;
 
+const BatterCard = styled.div`
+  width: 480px;
+  height: 100px;
+  .title {
+    font-size: 14px;
+  }
+`;
+
+const BattingResultCard = styled.div`
+  background-color: ${({ color }) => color};
+  color: ${({ color }) => (color === 'yellow' ? 'black' : 'white')};
+  padding: 5px 10px;
+  margin: 0 8px;
+  width: 44px;
+  height: 32px;
+  text-align: center;
+`;
+
 const PrtSC = ({
   startingLineUp,
   strikes,
@@ -96,6 +115,10 @@ const PrtSC = ({
   homeTeamName,
   awayScores,
   homeScores,
+  batterOrder,
+  batterNumber,
+  batterName,
+  batterRecords,
 }) => {
   return (
     <StyledPrtSC>
@@ -120,37 +143,49 @@ const PrtSC = ({
             ))}
           </tbody>
         </StyledTable>
-        <InfoBoard>
-          <div className="horiDiv">
-            <div className="teams">
-              <div className="horiDiv">
-                <p className="teams--name">{awayTeamName}</p>
-                <p className="teams--score">{awayScores}</p>
+        <div>
+          <InfoBoard>
+            <div className="horiDiv">
+              <div className="teams">
+                <div className="horiDiv">
+                  <p className="teams--name">{awayTeamName}</p>
+                  <p className="teams--score">{awayScores}</p>
+                </div>
+                <div className="horiDiv">
+                  <p className="teams--name">{homeTeamName}</p>
+                  <p className="teams--score">{homeScores}</p>
+                </div>
               </div>
-              <div className="horiDiv">
-                <p className="teams--name">{homeTeamName}</p>
-                <p className="teams--score">{homeScores}</p>
+              <div className="bases">
+                <div className="horiDiv">
+                  {reverse(bases).map((runnerOnBase, index) => (
+                    <Base
+                      key={`${runnerOnBase ? 'true' : 'false'}-${index}`}
+                      runnerOnBase={runnerOnBase}
+                      index={index}
+                    ></Base>
+                  ))}
+                </div>
+                <p className="bases--inning">{`${innings} ${inningFrame}`}</p>
               </div>
             </div>
-            <div className="bases">
-              <div className="horiDiv">
-                {reverse(bases).map((runnerOnBase, index) => (
-                  <Base
-                    key={`${runnerOnBase ? 'true' : 'false'}-${index}`}
-                    runnerOnBase={runnerOnBase}
-                    index={index}
-                  ></Base>
-                ))}
-              </div>
-              <p className="bases--inning">{`${innings} ${inningFrame}`}</p>
+            <div className="sbo">
+              <p>{`S ${strikes}`}</p>
+              <p>{`B ${balls}`}</p>
+              <p>{`O ${outs}`}</p>
             </div>
-          </div>
-          <div className="sbo">
-            <p>{`S ${strikes}`}</p>
-            <p>{`B ${balls}`}</p>
-            <p>{`O ${outs}`}</p>
-          </div>
-        </InfoBoard>
+          </InfoBoard>
+          <BatterCard>
+            <div className="title">{`order ${batterOrder} ${batterName} ${batterNumber}`}</div>
+            <div className="horiDiv">
+              {batterRecords.map((r, index) => (
+                <BattingResultCard color={BATTING_RESULT_LIST[r].color} key={`${r}-${index}`}>
+                  {BATTING_RESULT_LIST[r].short}
+                </BattingResultCard>
+              ))}
+            </div>
+          </BatterCard>
+        </div>
       </div>
     </StyledPrtSC>
   );

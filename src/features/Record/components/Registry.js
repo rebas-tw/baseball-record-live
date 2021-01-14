@@ -175,7 +175,9 @@ const Registry = ({
 
   return (
     <>
-      <Button onClick={onOpen}>球隊/員登錄</Button>
+      <Button onClick={onOpen} size="sm">
+        球隊/員登錄
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>

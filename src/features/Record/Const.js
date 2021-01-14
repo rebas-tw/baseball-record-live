@@ -1,3 +1,71 @@
+export const BATTING_RESULT_LIST = {
+  H: {
+    display: '安打',
+    short: 'H',
+    color: 'red',
+  },
+  TWOB: {
+    display: '二安',
+    short: '2B',
+    color: 'red',
+  },
+  THREEB: {
+    display: '三安',
+    short: '3B',
+    color: 'red',
+  },
+  HOMERUN: {
+    display: '全壘打',
+    short: 'HR',
+    color: 'red',
+  },
+  BB: {
+    display: '保送',
+    short: 'BB',
+    color: 'yellow',
+  },
+  HBP: {
+    display: '觸身',
+    short: 'HBP',
+    color: 'yellow',
+  },
+  SAC: {
+    display: '犧觸',
+    short: 'SAC',
+    color: 'yellow',
+  },
+  SF: {
+    display: '犧飛',
+    short: 'SF',
+    color: 'yellow',
+  },
+  FC: {
+    display: '野選',
+    short: 'FC',
+    color: 'blue',
+  },
+  E: {
+    display: '失誤',
+    short: 'E',
+    color: 'blue',
+  },
+  K: {
+    display: '三振',
+    short: 'K',
+    color: 'blue',
+  },
+  G: {
+    display: '滾地',
+    short: 'G',
+    color: 'blue',
+  },
+  F: {
+    display: '飛球',
+    short: 'F',
+    color: 'blue',
+  },
+};
+
 export const debugPlayers = [
   {
     number: '00',
