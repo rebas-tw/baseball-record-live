@@ -51,6 +51,69 @@ const Record = () => {
 
   const [isReverse, setIsReverse] = useState(false);
 
+  const overrideLocalStorage = () => {
+    const data = {
+      awayTeamName,
+      awayPlayers,
+      awayInGamePlayers,
+      awayCurrentPlayerIndex,
+      homeTeamName,
+      homePlayers,
+      homeInGamePlayers,
+      homeCurrentPlayerIndex,
+      reviewPlayerIndex,
+      startingLineUp,
+      strikes,
+      balls,
+      outs,
+      bases,
+      innings,
+      inningFrame,
+      awayScores,
+      homeScores,
+      batterOrder,
+      batterNumber,
+      batterName,
+      batterRecords,
+    };
+    window.localStorage.setItem('baseball-record-live', JSON.stringify(data));
+  };
+
+  const readLocalStorage = () => {
+    const dataString = window.localStorage.getItem('baseball-record-live');
+    if (!dataString) {
+      return;
+    }
+
+    const data = JSON.parse(dataString);
+    if (!data.awayTeamName) {
+      return;
+    }
+
+    setAwayTeamName(data.awayTeamName);
+    setAwayPlayers(data.awayPlayers);
+    setAwayInGamePlayers(data.awayInGamePlayers);
+    setAwayCurrentPlayerIndex(data.awayCurrentPlayerIndex);
+    setHomeTeamName(data.homeTeamName);
+    setHomePlayers(data.homePlayers);
+    setHomeInGamePlayers(data.homeInGamePlayers);
+    setHomeCurrentPlayerIndex(data.homeCurrentPlayerIndex);
+    setReviewPlayerIndex(data.reviewPlayerIndex);
+    setStartingLineUp(data.startingLineUp);
+    setStrikes(data.strikes);
+    setBalls(data.balls);
+    setOuts(data.outs);
+    setBases(data.bases);
+    setInnings(data.innings);
+    setInningFrame(data.inningFrame);
+    setAwayScores(data.awayScores);
+    setHomeScores(data.homeScores);
+    setBatterOrder(data.batterOrder);
+    setBatterNumber(data.batterNumber);
+    setBatterName(data.batterName);
+    setBatterRecords(data.batterRecords);
+  };
+
   const handleNumberKeyReverse = useCallback(
     (event) => {
       const code = event.code;
@@ -721,6 +784,14 @@ const Record = () => {
               editPlayer={editPlayer}
               removePlayer={removePlayer}
             />
+            <Flex>
+              <Button size="xs" onClick={overrideLocalStorage}>
+                覆寫暫存
+              </Button>
+              <Button size="xs" onClick={readLocalStorage}>
+                讀取暫存
+              </Button>
+            </Flex>
           </Flex>
         </Box>
       </Box>
