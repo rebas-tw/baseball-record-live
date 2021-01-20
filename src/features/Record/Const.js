@@ -1,7 +1,7 @@
 export const BATTING_RESULT_LIST = {
   H: {
     display: '安打',
-    short: 'H',
+    short: '1B',
     color: 'red',
   },
   TWOB: {
@@ -56,12 +56,12 @@ export const BATTING_RESULT_LIST = {
   },
   G: {
     display: '滾地',
-    short: 'G',
+    short: 'GO',
     color: 'blue',
   },
   F: {
     display: '飛球',
-    short: 'F',
+    short: 'FO',
     color: 'blue',
   },
 };

@@ -49,6 +49,8 @@ const Record = () => {
   const [batterName, setBatterName] = useState('-');
   const [batterRecords, setBatterRecords] = useState([]);
 
+  const [pitcherName, setPitcherName] = useState('-');
+
   const [isReverse, setIsReverse] = useState(false);
 
   const overrideLocalStorage = () => {
@@ -536,8 +538,14 @@ const Record = () => {
     setBatterName('-');
     setBatterNumber('-');
     setBatterRecords([]);
+    setPitcherName('-');
 
     if (inningFrame === '上') {
+      const pitcher = find((p) => p.position === 'P', awayInGamePlayers);
+      if (pitcher) {
+        setPitcherName(pitcher.player.split(';')[1]);
+      }
+
       const currentPlayer = awayInGamePlayers[awayCurrentPlayerIndex];
       if (!currentPlayer.player) {
         return;
@@ -555,6 +563,11 @@ const Record = () => {
       setBatterNumber(targetNumber);
       setBatterRecords(target.records);
       return;
+    }
+
+    const pitcher = find((p) => p.position === 'P', homeInGamePlayers);
+    if (pitcher) {
+      setPitcherName(pitcher.player.split(';')[1]);
     }
 
     const currentPlayer = homeInGamePlayers[homeCurrentPlayerIndex];
@@ -605,6 +618,7 @@ const Record = () => {
             batterNumber={batterNumber}
             batterName={batterName}
             batterRecords={batterRecords}
+            pitcherName={pitcherName}
           />
         </Box>
         <Box id="control-panel" w="100%" h="calc(95vh - 480px)" overflowY="scroll">
