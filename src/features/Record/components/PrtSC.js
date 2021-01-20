@@ -19,6 +19,7 @@ import outBg from '../assets/out.png';
 const StyledPrtSC = styled.div`
   width: 100%;
   height: 100%;
+  background-color: #008000;
   overflow: hidden;
   .horiDiv {
     display: flex;
@@ -32,7 +33,7 @@ const InfoBoard = styled.div`
   background: url(${infoBg});
   background-size: cover;
   background-repeat: no-repeat;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   color: white;
   display: flex;
@@ -80,6 +81,7 @@ const InfoBoard = styled.div`
     position: absolute;
     top: 190px;
     left: 60px;
+    font-size: 20px;
   }
 `;
 
@@ -117,9 +119,11 @@ const SBO = styled.div`
 `;
 
 const BatterCard = styled.div`
-  position: relative;
-  width: 420px;
-  height: 65px;
+  position: absolute;
+  top: 370px;
+  left: 10px;
+  width: 630px;
+  height: 98px;
   background: url(${batterBg});
   background-size: cover;
   background-repeat: no-repeat;
@@ -127,28 +131,31 @@ const BatterCard = styled.div`
   font-weight: bold;
   .order {
     position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 12px;
+    top: 12px;
+    left: 25px;
+    font-size: 20px;
   }
   .name {
     position: absolute;
-    top: 25px;
-    left: 20px;
-    font-size: 16px;
+    top: 40px;
+    left: 25px;
+    font-size: 24px;
   }
 `;
 
 const BattingResultCard = styled.div`
   position: absolute;
-  top: 18px;
+  top: 25px;
   left: ${({ left }) => left}px;
   background: url(${({ bgUrl }) => bgUrl});
   background-size: cover;
   background-repeat: no-repeat;
-  width: 51px;
-  height: 29px;
+  width: 75px;
+  height: 45px;
   text-align: center;
+  padding-top: 3px;
+  font-weight: bold;
+  font-size: 24px;
 `;
 
 const getBgUrl = (color) => {
@@ -203,7 +210,7 @@ const PrtSC = ({
   return (
     <StyledPrtSC>
       <div className="horiDiv">
-        <Table variant="striped" w="240px" textAlign="center" borderRadius="10px">
+        <Table variant="striped" w="240px" textAlign="center" borderRadius="10px" bgColor="white">
           <Thead w="240px">
             <Tr w="240px">
               <Th w="36px" overflow="hidden" whiteSpace="nowrap"></Th>
@@ -277,24 +284,24 @@ const PrtSC = ({
             ))}
             <div className="pitcher">{pitcherName}</div>
           </InfoBoard>
-          <BatterCard>
-            <div className="order">第{batterOrder}棒</div>
-            <div className="name">{`${batterName}    ${batterNumber}`}</div>
-            <div className="horiDiv">
-              {/* 最多顯示近期五個打席 */}
-              {batterRecords.slice(-5).map((r, index) => (
-                <BattingResultCard
-                  bgUrl={getBgUrl(BATTING_RESULT_LIST[r].color)}
-                  left={120 + index * 60}
-                  key={`${r}-${index}`}
-                >
-                  {BATTING_RESULT_LIST[r].short}
-                </BattingResultCard>
-              ))}
-            </div>
-          </BatterCard>
         </div>
       </div>
+      <BatterCard>
+        <div className="order">第{batterOrder}棒</div>
+        <div className="name">{`${batterName}    ${batterNumber}`}</div>
+        <div className="horiDiv">
+          {/* 最多顯示近期五個打席 */}
+          {batterRecords.slice(-5).map((r, index) => (
+            <BattingResultCard
+              bgUrl={getBgUrl(BATTING_RESULT_LIST[r].color)}
+              left={185 + index * 85}
+              key={`${r}-${index}`}
+            >
+              {BATTING_RESULT_LIST[r].short}
+            </BattingResultCard>
+          ))}
+        </div>
+      </BatterCard>
     </StyledPrtSC>
   );
 };
