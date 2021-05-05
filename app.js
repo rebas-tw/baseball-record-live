@@ -1,15 +1,18 @@
+import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import * as dotenv from 'dotenv';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
+import path from 'path';
 
 const main = () => {
   const devMode = process.env.HOST === 'localhost';
   const serveURL = `${devMode ? 'http' : 'https'}://${process.env.HOST}${devMode ? `:${process.env.PORT}` : ''}`;
   const frontendURL = devMode ? `http://${process.env.HOST}:${process.env.FRONTEND_PORT}` : serveURL;
 
-  const server = createServer();
+  const app = express();
+  const server = createServer(app);
   const io = new Server(server, {
     cors: {
       origin: frontendURL,
@@ -111,6 +114,11 @@ const main = () => {
       client.broadcast.in(roomID).emit('request_game');
     });
   });
+
+  app.get('/', (_, res) => {
+    res.sendFile(path.resolve() + '/frontend/build/index.html');
+  });
+  app.use(express.static(path.resolve() + '/frontend/build/'));
 
   server.listen(process.env.PORT, () => {
     console.log(`Now listen on ${serveURL}`);

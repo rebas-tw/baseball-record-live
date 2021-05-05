@@ -3,6 +3,9 @@ export const getInGamePlayerKey = (number, name) => {
 };
 
 export const getPlayerNumberName = (key) => {
+  if (!key) {
+    return ['', ''];
+  }
   return key.split(';;');
 };
 
