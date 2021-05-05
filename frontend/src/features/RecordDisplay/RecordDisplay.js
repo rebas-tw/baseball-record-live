@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
   height: 90vh;
 `;
 
-const RecordDisplay = ({ roomID, readOnlyRecord }) => {
+const RecordDisplay = ({ isSocketConnected, roomID, readOnlyRecord }) => {
   const [startingLineUp, setStartingLineUp] = useState([]);
   const [batterOrder, setBatterOrder] = useState(0);
   const [batterNumber, setBatterNumber] = useState('');
@@ -41,7 +41,10 @@ const RecordDisplay = ({ roomID, readOnlyRecord }) => {
 
   return (
     <StyledDiv>
-      <div>紀錄代碼：{roomID}</div>
+      <div>
+        紀錄代碼：{roomID}
+        {!isSocketConnected && `（斷線重新連線中...）`}
+      </div>
       {!readOnlyRecord ? (
         <div>等待 10 秒後仍無紀錄代表無此房間</div>
       ) : (

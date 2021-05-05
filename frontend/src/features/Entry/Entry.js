@@ -96,7 +96,6 @@ const Entry = () => {
           setIsEditor(true);
           return;
         }
-        setReadOnlyRecord(null);
         socket.emit('get_game');
       });
 
@@ -163,7 +162,8 @@ const Entry = () => {
     socket.emit('join_room', readRoomID);
   };
 
-  if (!isSocketConnected) {
+  // 房間外或編輯模式下，可以跳離視窗顯示字串
+  if (!isSocketConnected && (!roomID || isEditor)) {
     return (
       <StyledDiv>
         {roomID && <div className="section">嘗試重新進入 {roomID} 紀錄間</div>}
@@ -207,7 +207,13 @@ const Entry = () => {
   }
 
   if (!isEditor) {
-    return <RecordDisplay roomID={roomID} readOnlyRecord={JSON.parse(JSON.stringify(readOnlyRecord))} />;
+    return (
+      <RecordDisplay
+        isSocketConnected={isSocketConnected}
+        roomID={roomID}
+        readOnlyRecord={JSON.parse(JSON.stringify(readOnlyRecord))}
+      />
+    );
   }
 
   return (

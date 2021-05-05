@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, CSSReset, extendTheme } from '@chakra-ui/react';
 import Entry from '~~features/Entry';
-import Record from '~~features/Record';
 
 const routes = [
   {
