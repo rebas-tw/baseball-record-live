@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { filter } from 'ramda';
 import { BATTING_RESULT_LIST } from '../Const';
+import { getPlayerNumberName } from '../../Record/Const';
 
 import batterBg from '../assets/batter.png';
 import infoBg from '../assets/info.png';
@@ -18,7 +19,8 @@ import outBg from '../assets/out.png';
 
 const StyledPrtSC = styled.div`
   width: 100%;
-  height: 100%;
+  height: 95vh;
+  padding: 10px;
   background-color: #008000;
   overflow: hidden;
   .horiDiv {
@@ -28,6 +30,7 @@ const StyledPrtSC = styled.div`
 
 const InfoBoard = styled.div`
   position: relative;
+  left: 10px;
   width: 345px;
   height: 240px;
   background: url(${infoBg});
@@ -120,7 +123,7 @@ const SBO = styled.div`
 
 const BatterCard = styled.div`
   position: absolute;
-  top: 370px;
+  bottom: 10px;
   left: 10px;
   width: 630px;
   height: 98px;
@@ -232,10 +235,10 @@ const PrtSC = ({
                   {index === 9 ? '' : index + 1}
                 </Td>
                 <Td textAlign="center" padding="0.4rem 0.5rem">
-                  {player.player.split(';')[0]}
+                  {getPlayerNumberName(player.player)[0]}
                 </Td>
                 <Td textAlign="center" padding="0.4rem 0.5rem">
-                  {player.player.split(';')[1]}
+                  {getPlayerNumberName(player.player)[1]}
                 </Td>
                 <Td textAlign="center" padding="0.4rem 0.5rem">
                   {player.position}
