@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { filter } from 'ramda';
-import { BATTING_RESULT_LIST } from '../Const';
-import { getPlayerNumberName } from '../../Record/Const';
+import { BATTING_RESULT_LIST, getPlayerNumberName } from '../../Record/Const';
 
 import batterBg from '../assets/batter.png';
 import infoBg from '../assets/info.png';
